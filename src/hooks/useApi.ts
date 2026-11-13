@@ -9,10 +9,14 @@ export const useApi = <T>(url: string, key: unknown[]) => {
   const { data, isLoading, isError: error } = useQuery({
     queryKey: key,
     queryFn: async () => {
-      const response = await pokeApi.get<T>(url);
-      return response.data;
+      return await getPokeApi<T>(url);
     },
   });
 
   return { error, isLoading, data };
+};
+
+export const getPokeApi = async <T>(url: string) => {
+  const response = await pokeApi.get<T>(url);
+  return response.data;
 };

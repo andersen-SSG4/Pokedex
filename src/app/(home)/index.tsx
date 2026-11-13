@@ -1,4 +1,3 @@
-import FloatingActionButton from '@/components/FloatingActionButton';
 import HomeRow from '@/components/HomeRow';
 import { usePokemons } from '@/hooks/pokemonHooks';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
@@ -20,13 +19,13 @@ export default function Index() {
             : pokemons && (
               <FlatList
                 data={pokemons}
+                onEndReached={loadMore}
                 renderItem={({ item }) => (
                   <HomeRow item={item} />
                 )}
               />
             )
       }
-      <FloatingActionButton onPress={loadMore} />
     </View>
   );
 }
