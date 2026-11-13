@@ -1,6 +1,7 @@
 import { Pokemon, usePokemonSprite } from '@/hooks/pokemonHooks';
+import { Link } from 'expo-router';
 import React from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Pressable, StyleSheet, Text } from 'react-native';
 
 interface IHomeRowProps {
   item: Pokemon;
@@ -10,28 +11,29 @@ const HomeRow = ({ item }: IHomeRowProps) => {
   const { error, isLoading, sprite } = usePokemonSprite(item.url);
 
   return (
-    <View style={styles.card} key={item.name}>
-      {
-        isLoading
-          ? (
-              <ActivityIndicator style={styles.tinyLogo} />
-            )
-          : error
+    <Link key={item.name} href={{ pathname: '/detail/[url]', params: { url: item.url } }} asChild>
+      <Pressable style={styles.card}>
+        {
+          isLoading
             ? (
-                <Text>Error</Text>
+                <ActivityIndicator style={styles.tinyLogo} />
               )
-            : sprite && (
-              <Image
-                style={styles.tinyLogo}
-                source={{
-                  uri: sprite,
-                }}
-              />
-            )
-      }
-
-      <Text style={styles.cardText}>{item.name}</Text>
-    </View>
+            : error
+              ? (
+                  <Text>Error</Text>
+                )
+              : sprite && (
+                <Image
+                  style={styles.tinyLogo}
+                  source={{
+                    uri: sprite,
+                  }}
+                />
+              )
+        }
+        <Text style={styles.cardText}>{item.name}</Text>
+      </Pressable>
+    </Link>
   );
 };
 

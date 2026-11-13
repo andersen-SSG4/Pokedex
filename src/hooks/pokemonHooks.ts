@@ -14,17 +14,35 @@ export type Pokemon = {
 };
 
 type PokemonDetail = {
-  id: number;
+  abilities: Ability[];
+  base_experience: number;
   height: number;
+  id: number;
   name: string;
-  species: Pokemon;
+  species: Species;
   sprites: Sprite;
-  types: Pokemon[];
+  types: Type[];
   weight: number;
+};
+
+type Ability = {
+  ability: Species;
+  is_hidden: boolean;
+  slot: number;
+};
+
+type Species = {
+  name: string;
+  url: string;
 };
 
 type Sprite = {
   front_default: string;
+};
+
+type Type = {
+  slot: number;
+  type: Species;
 };
 
 export const usePokemons = () => {
