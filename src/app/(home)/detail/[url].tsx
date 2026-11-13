@@ -81,7 +81,9 @@ const Detail = () => {
                     <Text
                       style={styles.abilityText}
                     >
-                      ○ {ability.ability.name}
+                      ○
+                      {' '}
+                      {ability.ability.name}
                     </Text>
                   </View>
                 ))}
