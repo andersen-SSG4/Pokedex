@@ -6,7 +6,7 @@ const stylistic = require('@stylistic/eslint-plugin');
 module.exports = defineConfig([
   expoConfig,
   {
-    ignores: ['dist/*'],
+    ignores: ['dist/*', 'example/*'],
   },
   stylistic.configs.customize({
     indent: 2,
